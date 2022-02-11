@@ -13,7 +13,7 @@ async function getTaxi() {
 async function showTaxionMap() {
   let taxiCoordinates = await getTaxi();
   // console.log(taxiCoordinates);
-
+  let markerClusterLayer = L.markerClusterGroup();
   //lng, lat
   for (let t of taxiCoordinates) {
     let lat = t[1];
@@ -21,6 +21,7 @@ async function showTaxionMap() {
     let marker = L.marker([lat, lng]);
     marker.addTo(markerClusterLayer);
   }
+  markerClusterLayer.addTo(map);
 }
 
 window.addEventListener("DOMContentLoaded", async function () {
@@ -31,7 +32,6 @@ window.addEventListener("DOMContentLoaded", async function () {
   showTaxionMap();
   //every 30 second to call showTaxionMap again
   //setInterval accepts an anonymous function
-  setInterval(showTaxionMap, 35000);
 });
 
 let singapore = [1.29, 103.85];
@@ -63,5 +63,3 @@ L.tileLayer(
 ).addTo(map);
 
 //
-let markerClusterLayer = L.markerClusterGroup();
-markerClusterLayer.addTo(map);

@@ -1,16 +1,7 @@
 {
-  "folders": [
-	{
-		"path": "../tgc-js-dom-set-2-questions"
-	},
-	{
-		"path": "../tgc16-dom-practice"
-	},
-	{
-		"path": "."
-	}
-],
-"settings": {
-	"liveServer.settings.multiRootWorkspaceName": "tgc16-maps"
-}
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
 }

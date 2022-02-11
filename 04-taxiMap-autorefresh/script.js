@@ -31,8 +31,19 @@ window.addEventListener("DOMContentLoaded", async function () {
   showTaxionMap();
   //every 30 second to call showTaxionMap again
   //setInterval accepts an anonymous function
-  setInterval(showTaxionMap, 35000);
+
+  let i = 0;
+  function increaseOne() {
+    i++;
+  }
+
+  setInterval(() => {
+    increaseOne();
+    console.log(i);
+  }, 1000);
 });
+
+setInterval(showTaxionMap, 35000);
 
 let singapore = [1.29, 103.85];
 
