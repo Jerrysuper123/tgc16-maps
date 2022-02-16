@@ -1,17 +1,27 @@
 #singapore-map {
-  height: 100vh;
+  height: 80vh;
 }
 
-#map-containter {
+#map-container {
   position: relative;
 }
 
 #search-container {
   position: absolute;
-  top: 10px;
-  left: 60px;
-  /* muse be below z-index, because map is set to be 314158 */
+  top: 5px;
+  left: 45px;
   z-index: 314159;
-  background-color: white;
-  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  min-width: 300px;
+  min-height: 50px;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+#search-btn {
+  margin-left: 10px;
+}
+
+.search-result {
+  padding: 10px;
 }

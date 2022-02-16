@@ -1,17 +1,50 @@
-//entry function of our application, no function outside this main functions
-
+// Create a foursquare map using an application framework
+// is the entry point of our application
 async function main() {
-  //nested function
-  //init can only be called in the main function
-  //init to initalize our application
-  //ALL EVENTLISTENER ARE IN INIT FUNCTION
+  // nested function
+  // the init function, because is nested inside the main function
+  // can only be called in the main function
   function init() {
     let map = initMap();
-    window.addEventListener("DOMContentLoaded", function () {});
+    let searchResultLayer = L.layerGroup();
+    searchResultLayer.addTo(map);
+
+    window.addEventListener("DOMContentLoaded", function () {
+      document
+        .querySelector("#search-btn")
+        .addEventListener("click", async function () {
+          searchResultLayer.clearLayers(); // get rid of the existing markers
+          let query = document.querySelector("#search-input").value;
+          let center = map.getBounds().getCenter();
+          let response = await search(center.lat, center.lng, query);
+          console.log(response);
+          // get the div that will display the search results
+          let searchResultElement = document.querySelector("#search-results");
+
+          for (let eachVenue of response.results) {
+            let coordinate = [
+              eachVenue.geocodes.main.latitude,
+              eachVenue.geocodes.main.longitude,
+            ];
+            let marker = L.marker(coordinate);
+            marker.bindPopup(`<div>${eachVenue.name}</div>`);
+            marker.addTo(searchResultLayer);
+
+            let resultElement = document.createElement("div");
+            resultElement.innerHTML = eachVenue.name;
+            resultElement.className = "search-result";
+            resultElement.addEventListener("click", function () {
+              map.flyTo(coordinate, 16);
+              marker.openPopup();
+            });
+
+            searchResultElement.appendChild(resultElement);
+          }
+        });
+    });
   }
 
-  init();
-
+  // create our map
   function initMap() {
     let singapore = [1.29, 103.85];
     let map = L.map("singapore-map");
@@ -34,6 +67,7 @@ async function main() {
 
     return map;
   }
-}
 
+  init();
+}
 main();

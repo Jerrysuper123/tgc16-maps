@@ -27,6 +27,7 @@ async function readCoordinates() {
   let hdbGroup = L.layerGroup();
   for (let hdb of hdbArray) {
     let m = L.marker(hdb.coordinates);
+    m.bindPopup(hdb.name);
     m.addTo(hdbGroup);
   }
 
@@ -36,7 +37,7 @@ async function readCoordinates() {
   let natureGroup = L.layerGroup();
   for (let nature of natureArray) {
     let m = L.marker(nature.coordinates);
-
+    m.bindPopup(nature.name);
     m.addTo(natureGroup);
   }
 
@@ -46,6 +47,7 @@ async function readCoordinates() {
   let mailGroup = L.layerGroup();
   for (let mail of mailArray) {
     let m = L.marker(mail.coordinates);
+    m.bindPopup(mail.name);
     m.addTo(mailGroup);
   }
 
